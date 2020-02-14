@@ -1,0 +1,22 @@
+{% extends "base/base.html" %}
+
+{% block title %}Reset password{% endblock %}
+
+{% block body %}
+  <h1>Reset {{ username }}'s password</h1>
+
+  {% if no_match %}
+    <p>Passwords don't match</p>
+  {% endif %}
+
+  <form action="/settings/users/{{ url }}/resetpass/" method="post">
+    {% csrf_token %}
+    New password: <input type="password" name="newpass1"><br>
+    New password (again): <input type="password" name="newpass2"><br>
+
+    <button type="submit">Change password and back to edit user</button>
+    <br>
+  </form>
+
+  <a href="/settings/users/{{ url }}">Back to edit user</a>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base/base.html" %}
+
+{% block title %}Change password{% endblock %}
+
+{% block body %}
+  <h1>Change password</h1>
+
+  {% if wrong_pass %}
+    <p>Incorrect password</p>
+  {% endif %}
+
+  {% if no_match %}
+    <p>Passwords don't match</p>
+  {% endif %}
+
+
+  <form class="" action="/changepass/" method="post">
+    {% csrf_token %}
+    Old password: <input type="password" name="oldpass">
+    <br>
+    New password: <input type="password" name="newpass1">
+    <br>
+    New password (again): <input type="password" name="newpass2">
+    <br>
+    <button type="submit">Change password and log out</button>
+    <br>
+  </form>
+{% endblock %}

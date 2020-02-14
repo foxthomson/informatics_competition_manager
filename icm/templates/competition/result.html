@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+
+{% block head %}Submission results{% endblock %}
+
+{% block body %}
+  <h1>Submission results for {{ questiontitle }}</h1>
+
+  {% if success %}
+    <p>Your code passed {{ passed }} out of {{ numtestcases }} test cases ({{ score }} out of {{ maxmarks }} marks)</p>
+  {% else %}
+    <pre>{{ error }}</pre>
+  {% endif %}
+
+  <p id="score">Score: {{ totalscore }}</p>
+
+  <a href="/comp/">Back to question list</a>
+{% endblock %}

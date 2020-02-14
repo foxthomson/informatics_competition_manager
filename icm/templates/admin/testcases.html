@@ -1,0 +1,60 @@
+{% extends "base/base.html" %}
+
+{% block title %}Testcases{% endblock %}
+
+{% block body %}
+  <script>
+    // add a row to the table of testcases
+    function addrow() {
+    // find the table
+    var table = document.getElementById("testcases");
+    // add row at end
+    var numrows = table.rows.length
+    var row = table.insertRow(numrows);
+    // add new cells
+    row.insertCell(0).innerHTML =
+      '<textarea name="inp' + numrows + '" rows="3" cols="20"></textarea>';
+    row.insertCell(1).innerHTML =
+      '<textarea name="out' + numrows + '" rows="3" cols="20"></textarea>';
+    row.insertCell(2).innerHTML =
+      `<select name="weight` + numrows + `">
+         <option value="1">1</option>
+         <option value="2">2</option>
+         <option value="3">3</option>
+       </select>`;
+    }
+  </script>
+
+  <h1>Testcases for {{ title }}</h1>
+
+  <form action="/settings/questions/{{ title|urlize }}/testcases/" method="post">
+     {% csrf_token %}
+    <table id="testcases">
+      <thead>
+        <th>Input</th>
+        <th>Expected output</th>
+        <th>Weighting</th>
+      </thead>
+      {% for inp, out, weight in testcases %}
+        <tr>
+          <td>
+            <textarea name="inp{{ forloop.counter }}" rows="3" cols="20">{{ inp }}</textarea>
+          </td>
+          <td>
+            <textarea name="out{{ forloop.counter }}" rows="3" cols="20">{{ out }}</textarea>
+          </td>
+          <td>
+            <select name="weight{{ forloop.counter }}">
+              <option value="1" {% if weight == 1 %}selected="selected"{% endif %}>1</option>
+              <option value="2" {% if weight == 2 %}selected="selected"{% endif %}>2</option>
+              <option value="3" {% if weight == 3 %}selected="selected"{% endif %}>3</option>
+            </select>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+    <button type="button" onclick="addrow()">Add testcase</button>
+    <br><br><input type="submit" value="Save and back to question list">
+  </form>
+  <a href="/settings/questions/">Back to question list</a>
+{% endblock %}

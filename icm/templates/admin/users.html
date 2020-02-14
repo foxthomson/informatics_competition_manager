@@ -1,0 +1,23 @@
+{% extends "base/base.html" %}
+
+{% block title %}User list{% endblock %}
+
+{% block body %}
+  <h1>User list</h1>
+
+  <table>
+    <thead>
+        <th>Username</th>
+        <th>User type</th>
+    </thead>
+    {% for username, type, url in user_list %}
+      <tr>
+        <td>{{ username }}</td>
+        <td>{{ type }}</td>
+        <td><a href="/settings/users/{{ url }}">Edit user</a></td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  <a href="/settings/">Back to settings</a>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base/base.html" %}
+
+{% block title %}Pick competition{% endblock %}
+
+{% block body %}
+  <h1>Pick competition</h1>
+
+  {% if error %}
+    <p>{{ error }}</p>
+  {% endif %}
+
+  {{ compeitions }}
+  {% for comp in competitions %}
+    <a href="/settings/users/{{ url }}/submissions/{{ comp }}">{{ comp }}</a><br>
+  {% endfor %}
+
+  <a href="/settings/users/{{ url }}/">Back to user details</a>
+{% endblock %}

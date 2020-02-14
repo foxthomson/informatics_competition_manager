@@ -1,0 +1,61 @@
+{% extends "base/base.html" %}
+
+{% block title %}Make a question{% endblock %}
+
+{% block body %}
+  <script>
+    // add a row to the table of testcases
+    function addrow() {
+    // find the table
+    var table = document.getElementById("testcases");
+    // add row at end
+    var numrows = table.rows.length
+    var row = table.insertRow(numrows);
+    // add new cells
+    row.insertCell(0).innerHTML =
+      '<textarea name="inp' + numrows + '" rows="3" cols="20"></textarea>';
+    row.insertCell(1).innerHTML =
+      '<textarea name="out' + numrows + '" rows="3" cols="20"></textarea>';
+    row.insertCell(2).innerHTML =
+      `<select name="weight` + numrows + `">
+         <option value="1">1</option>
+         <option value="2">2</option>
+         <option value="3">3</option>
+       </select>`;
+    }
+  </script>
+
+  <h1>Make question</h1>
+  <form method="post", action="/question/">
+    {% csrf_token %}
+    Name of question: <input name="name" type="text"><br><br>
+    Description:<br>
+    <textarea name="description" rows="8" cols="80"></textarea><br><br>
+    Time to run each testcase in seconds: <input type="number" name="time" min="1" max="20">
+    <br><br>Testcases:
+    <table id="testcases">
+      <thead>
+        <th>Input</th>
+        <th>Expected output</th>
+        <th>Weighting</th>
+      </thead>
+      <tr>
+        <td>
+          <textarea name="inp1" rows="3" cols="20"></textarea>
+        </td>
+        <td>
+          <textarea name="out1" rows="3" cols="20"></textarea>
+        </td>
+        <td>
+          <select name="weight1">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+    <button type="button" onclick="addrow()">Add testcase</button>
+    <br><br><input type="submit" value="Save and back to index">
+  </form><br>
+{% endblock %}

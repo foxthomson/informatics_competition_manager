@@ -1,0 +1,9 @@
+{% extends "base/base.html" %}
+
+{% block title %}Submissions{% endblock %}
+
+{% block body %}
+  <h1>Submission by {{ username }} for {{ question }} in {{ competition }}</h1>
+  <pre>{{ code }}</pre>
+  <a href="/settings/users/{{ username }}/submissions/{{ compeition|urlencode }}">Back to user details</a>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base/base.html" %}
+
+{% block title %}{{ title }} - {{ compname }}{% endblock %}
+
+{% block body %}
+  <h1>{{ compname }}</h1>
+  <h2>{{ title }}</h2>
+
+  {{ description|linebreaks }}
+
+  {% if usertype == "C" %}
+    <form action="/comp/{{ title|urlize }}/results/" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      Upload your C++ file (.cpp extention): 
+      <input type="file" name="upload" accept=".cpp"><br>
+      <button type="submit">Submit</button>
+    </form>
+    <p id="score">Score: {{ score }}</p>
+  {% endif %}
+
+  <a href="/comp/">Back to question list</a>
+{% endblock %}

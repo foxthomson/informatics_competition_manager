@@ -1,0 +1,36 @@
+{% extends "base/base.html" %}
+
+{% block title %}Submissions{% endblock %}
+
+{% block body %}
+  <h1>Submissions for {{ username }} in {{ competition }}</h1>
+
+  <h2>Statistics</h2>
+  <p>Total score {{ totalscore }}</p>
+  <p>Mean score {{ meanscore }}</p>
+  <p>Number attempted {{ numattempted }}</p>
+  <p>Mean score (of questions attempted) {{ meanattempted }}</p>
+  <p>Number of attempts {{ totalattempts }}</p>
+
+  <h2>Submissions</h2>
+  <table>
+    <thead>
+      <th>Question</th>
+      <th>Score</th>
+      <th>Attempts</th>
+    </thead>
+    {% for question, score, attempts, attemptids in questions %}
+      <tr>
+        <td>{{ question }}</td>
+        <td>{{ score }}</td>
+        <td>{{ attempts }}</td>
+        {% for attemptid in attemptids %}
+          <td><a href="/settings/users/{{ username }}/submissions/{{ competition }}/{{ attemptid }}">{{ forloop.counter }}</a></td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+
+  </table>
+
+  <a href="/settings/users/{{ username }}/">Back to user details</a>
+{% endblock %}

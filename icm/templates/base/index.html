@@ -1,0 +1,22 @@
+{% extends "base/base.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block body %}
+  <h1>Index</h1>
+  {% if running %}
+    <a href="/comp/">Go to competition</a><br>
+    {% if usertype == "A" %}
+      <a href="/scores/">View scores</a><br>
+    {% endif %}
+  {% endif %}
+  {% if usertype == "A" %}
+    <a href="/settings/">Admin settings</a><br>
+  {% endif %}
+  {% if usertype in "AQ" %}
+    <a href="/question/">Make a Question</a><br>
+    <a href="/questions/">Question list</a><br>
+  {% endif %}
+  <a href="/changepass/">Change password</a><br>
+  <a href="/logout/">Log out</a>
+{% endblock %}

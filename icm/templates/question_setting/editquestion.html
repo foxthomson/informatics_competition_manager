@@ -1,0 +1,16 @@
+{% extends "base/base.html" %}
+
+{% block title %}Edit question &quot;{{ title }}&quot;{% endblock %}
+
+{% block body %}
+  <h1>Edit question &quot;{{ title }}&quot;</h1>
+  <form method="post", action="/questions/{{ title|urlize }}/">
+    {% csrf_token %}
+    Name of question: <input name="title" type="text" value="{{ title }}"><br><br>
+    Description:<br>
+    <textarea name="description" rows="8" cols="80">{{ question }}</textarea><br><br>
+    Time to run each testcase in seconds: <input type="number" name="time" min="1" max="20" value="{{ time }}">
+    <br><br><input type="submit" value="Save and back to question list">
+  </form><br>
+  <a href="/questions/">Back to question list</a>
+{% endblock %}

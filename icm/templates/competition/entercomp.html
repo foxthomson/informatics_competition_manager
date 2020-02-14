@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+
+{% block title %}Enter competition name{% endblock %}
+
+{% block body %}
+  <h1>Enter competition name</h1>
+
+  {% if error %}
+    <p>{{ error }}</p>
+  {% endif %}
+
+  <form action="/comp/" method="post">
+    {% csrf_token %}
+    Competition name: <input type="text" name="compname">
+    <button type="submit">Enter competition</button>
+  </form>
+{% endblock %}

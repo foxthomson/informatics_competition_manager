@@ -1,0 +1,28 @@
+{% extends "base/base.html" %}
+
+{% block title %}Edit {{ username }}{% endblock %}
+
+{% block body %}
+  <h1>Edit {{ username }}</h1>
+
+  <form action="/settings/users/{{ url }}/" method="post">
+    {% csrf_token %}
+    Username: <input type="text" name="username" value="{{ username }}"><br>
+
+    User type: <select name="usertype">
+      <option value="A" {% if usertype == "A" %}selected="selected"{% endif %}>Admin</option>
+      <option value="Q" {% if usertype == "Q" %}selected="selected"{% endif %}>Question Setter</option>
+      <option value="C" {% if usertype == "C" %}selected="selected"{% endif %}>Competitior</option>
+    <br>
+    <p class="description">Admin users can make, view and edit competitions, questions and users and view users scores and submissions</p>
+    <p class="description">Question detters can make and view questions and view competitions</p>
+    <p class="description">Competitiors can view and submit solutions to compeititon questions whena compeititon is running</p>
+  </select><br>
+
+  <button type="submit">Save and exit</button><br><br>
+  </form>
+
+  <a href="/settings/users/{{ url }}/resetpass">Reset password</a><br>
+  <a href="/settings/users/{{ url }}/submissions">View submissions and statistics</a><br>
+  <a href="/settings/users">Back to user list</a>
+{% endblock %}

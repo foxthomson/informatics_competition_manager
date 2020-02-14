@@ -1,0 +1,50 @@
+{% extends "base/base.html" %}
+
+{% block title %}Start a competition{% endblock %}
+
+{% block body %}
+  <h1>Start a competition</h1>
+
+  {% if error %}<p class="error">{{ error }}</p>{% endif %}
+
+  <form action="" method="post">
+    {% csrf_token %}
+
+    Title: <input type="text" name="title"><br>
+    <p class="description">This is what the competitors needs to enter to join the competition</p>
+
+    End date: <input type="date" name="enddate"><br>
+    End time: <input type="time" name="endtime"><br>
+
+    Scoring type: <select name="scoringtype">
+      <option value="=">1 pass = 1 point</option>
+      <option value="%">Percent passed</option>
+      <option value="s">Sum of square of passes</option>
+      <option value="S">Sum of square of percent passed</option>
+      <option value="1">All passed = 1 point</option>
+    </select><br>
+    <p class="description">1 pass = 1 point means the user gets points equal to the weight of the testcase for each testcase passed</p>
+    <p class="description">Percent passed mean the user gets point equal to the percentage of the score from 1 point = 1 pass for each question</p>
+    <p class="description">Sum of square of passes means the user gets points equal to the square of the score from 1 point = 1 pass for eache questions</p>
+    <p class="description">Sum of square of percent passes means the user gets points equal to the square of the score from percent passed for eache questions</p>
+    <p class="description">All passed = 1 point means user only gets a point if they pass all testcases from a quesiton</p>
+
+    Questions:<br>
+    <table>
+      <thead>
+        <th>Question title</th>
+        <th>Include?</th>
+      </thead>
+      {% for title, id in questions %}
+        <tr>
+          <td>{{ title }}</td>
+          <td><input type="checkbox" name="q{{ id }}"></td>
+        </tr>
+      {% endfor %}
+    </table><br>
+
+    <button type="submit">Start competition and back to admin settings</button>
+  </form>
+
+  <a href="/settings/">Back to admin settings</a>
+{% endblock %}

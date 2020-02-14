@@ -1,0 +1,20 @@
+{% extends "base/base.html" %}
+
+{% block title %}Question list{% endblock %}
+
+{% block body %}
+  <h1>Question list</h1>
+
+  <table>
+    <thead>
+        <th>Question title</th>
+    </thead>
+    {% for title in question_list %}
+      <tr>
+        <td>{{ title }}</td>
+        <td><a href="/questions/{{ title|urlize }}">Edit question</a></td>
+        <td><a href="/questions/{{ title|urlize }}/testcases">Edit testcases</a></td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

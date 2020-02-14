@@ -1,0 +1,15 @@
+{% extends "base/base.html" %}
+
+{% block title %}{{ compname }}{% endblock %}
+
+{% block body %}
+  <h1>{{ compname }}</h1>
+
+  {% for title in questions %}
+    <a href="/comp/{{ title|urlize }}">{{ title }}</a><br>
+  {% endfor %}
+
+  {% if competitor %}
+    <p id="score">Score: {{ score }}</p>
+  {% endif %}
+{% endblock %}

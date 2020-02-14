@@ -1,0 +1,19 @@
+{% extends "base/base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+<h1>Login</h1>
+<form action="/login/" method="post">
+    {% if fail_login %}
+      <p>Incorrect username or password</p>
+    {% endif %}
+
+    {% csrf_token %}
+    Username: <input type="text" name="username" value="">
+    <br>
+    Password: <input type="password" name="password" value="">
+    <br>
+    <button type="submit">Sign in</button>
+</form>
+{% endblock %}

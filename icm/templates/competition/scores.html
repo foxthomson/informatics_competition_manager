@@ -1,0 +1,21 @@
+{% extends "base/base.html" %}
+
+{% block title %}Score list{% endblock %}
+
+{% block body %}
+  <h1>Score list for {{ competition.name }}</h1>
+  <h2>Ending at {{ competition.endtime|date:"H:i d/m/y" }}</h2>
+
+  <table>
+    <thead>
+      <th>Username</th>
+      <th>Score</th>
+    </thead>
+    {% for username, score in users %}
+      <tr>
+        <td>{{ username }}</td>
+        <td>{{ score }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
